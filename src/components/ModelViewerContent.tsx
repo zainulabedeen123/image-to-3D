@@ -39,8 +39,6 @@ export default function ModelViewerContent({ modelUrl }: ModelViewerContentProps
         bounds="tight"
         auto-scale
         scale="1 1 1"
-        
-        // Lighting and environment settings
         exposure="1.2"
         environment-image="legacy"
         skybox-image="legacy"
@@ -48,11 +46,10 @@ export default function ModelViewerContent({ modelUrl }: ModelViewerContentProps
         stage-light-intensity="3"
         shadow-intensity="1.5"
         shadow-softness="0.75"
-        
         style={{
           width: '100%',
           height: '100%',
-          backgroundColor: '#2a2a2a',
+          backgroundColor: '#1A1A1A',
         }}
       />
     </>

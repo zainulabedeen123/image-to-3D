@@ -25,10 +25,10 @@ export default function ModelViewer({ modelUrl, loading }: ModelViewerProps) {
 
   if (loading) {
     return (
-      <div className="w-full h-full min-h-[600px] flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <Loader2 className="w-8 h-8 animate-spin text-[#4d9eff]" />
-          <p className="text-gray-400">Generating 3D model...</p>
+      <div className="w-full h-[600px] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-6 h-6 animate-spin text-blue-500" />
+          <p className="text-gray-400 text-sm">Generating 3D model...</p>
         </div>
       </div>
     );
@@ -36,27 +36,27 @@ export default function ModelViewer({ modelUrl, loading }: ModelViewerProps) {
 
   if (!modelUrl) {
     return (
-      <div className="w-full h-full min-h-[600px] flex items-center justify-center">
-        <p className="text-gray-400">Your 3D model will appear here</p>
+      <div className="w-full h-[600px] flex items-center justify-center">
+        <p className="text-gray-400 text-sm">Your 3D model will appear here</p>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[600px]">
       <Script 
         type="module" 
         src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"
       />
-      <div className="flex-1 relative min-h-[550px]">
+      <div className="flex-1 relative">
         <ModelViewerContent modelUrl={modelUrl} />
       </div>
       
-      <div className="p-4 border-t border-gray-700">
+      <div className="p-4 border-t border-gray-800">
         <a 
           href={modelUrl} 
           download 
-          className="flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-[#4d9eff] hover:bg-[#3a7acc] transition-colors text-white font-medium w-full"
+          className="flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-blue-500 hover:bg-blue-600 transition-colors text-white font-medium w-full"
         >
           <Download className="w-4 h-4" />
           Download Model
