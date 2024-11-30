@@ -2,19 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #0E0E0E;
-  --foreground: #ffffff;
-  --card: #1A1A1A;
-  --card-foreground: #ffffff;
-  --border: #2A2A2A;
-  --primary: #3B82F6;
-  --primary-foreground: #ffffff;
-}
-
-body {
-  @apply bg-background text-foreground;
-  font-feature-settings: "rlig" 1, "calt" 1;
+@layer base {
+  :root {
+    --radius: 0.5rem;
+    
+    --background: 0 0% 5%;
+    --foreground: 0 0% 100%;
+    
+    --card: 0 0% 10%;
+    --card-foreground: 0 0% 100%;
+    
+    --border: 0 0% 16%;
+    
+    --primary: 214 100% 60%;
+    --primary-foreground: 0 0% 100%;
+  }
 }
 
 @layer base {
@@ -22,7 +24,30 @@ body {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[hsl(var(--background))] text-[hsl(var(--foreground))];
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors 
+    focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring 
+    disabled:pointer-events-none disabled:opacity-50;
+  }
+
+  .btn-primary {
+    @apply bg-[hsl(var(--primary))] text-[hsl(var(--primary-foreground))] hover:bg-[hsl(var(--primary))/90];
+  }
+
+  .card {
+    @apply rounded-lg border bg-[hsl(var(--card))] text-[hsl(var(--card-foreground))];
+  }
+
+  .input {
+    @apply flex h-9 w-full rounded-md border border-[hsl(var(--border))] bg-transparent px-3 py-1 text-sm 
+    transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium 
+    placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 
+    focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50;
   }
 }
 

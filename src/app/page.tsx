@@ -84,22 +84,24 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0E0E0E] text-white">
+    <main className="min-h-screen bg-[hsl(var(--background))]">
       <div className="max-w-7xl mx-auto p-6">
-        <h1 className="text-3xl font-bold mb-8">Image to 3D Converter</h1>
+        <h1 className="text-3xl font-bold mb-8 text-[hsl(var(--foreground))]">
+          Image to 3D Converter
+        </h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Left Column */}
           <div className="space-y-6">
             {/* Image Section */}
-            <div className="bg-[#1A1A1A] rounded-lg p-6">
+            <div className="card p-6">
               <div className="flex items-center justify-between mb-4">
                 <h2 className="text-xl">Image</h2>
                 <div className="flex gap-2">
-                  <button className="px-3 py-1 text-sm bg-[#1A1A1A] hover:bg-[#2A2A2A] rounded-md transition-colors">
+                  <button className="btn hover:bg-[hsl(var(--card-foreground)/10%)]">
                     Examples
                   </button>
-                  <button className="px-3 py-1 text-sm bg-[#1A1A1A] hover:bg-[#2A2A2A] rounded-md transition-colors">
+                  <button className="btn hover:bg-[hsl(var(--card-foreground)/10%)]">
                     Tutorials
                   </button>
                 </div>
@@ -109,8 +111,8 @@ export default function Home() {
                 {...getRootProps()} 
                 className={`relative border border-dashed rounded-lg transition-all
                   ${isDragActive 
-                    ? 'border-blue-500 bg-blue-500/10' 
-                    : 'border-gray-600 hover:border-gray-500'
+                    ? 'border-[hsl(var(--primary))] bg-[hsl(var(--primary))/10%]' 
+                    : 'border-[hsl(var(--border))] hover:border-[hsl(var(--border))/80%]'
                   }
                   ${preview ? 'aspect-square' : 'aspect-video'}
                 `}
@@ -124,8 +126,8 @@ export default function Home() {
                   />
                 ) : (
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6">
-                    <Upload className="w-6 h-6 text-gray-400 mb-2" />
-                    <p className="text-gray-400 text-center text-sm">
+                    <Upload className="w-6 h-6 text-[hsl(var(--foreground)/60%)] mb-2" />
+                    <p className="text-[hsl(var(--foreground)/60%)] text-center text-sm">
                       Drag & drop an image here, or click to select
                     </p>
                   </div>
@@ -134,16 +136,16 @@ export default function Home() {
             </div>
 
             {/* Settings Section */}
-            <div className="bg-[#1A1A1A] rounded-lg p-6">
+            <div className="card p-6">
               <h2 className="text-xl mb-6">Settings</h2>
               
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <label className="text-gray-300">Output Format:</label>
+                  <label className="text-[hsl(var(--foreground)/70%)]">Output Format:</label>
                   <select 
                     value={settings.output_format}
                     onChange={(e) => setSettings(s => ({ ...s, output_format: e.target.value as 'glb' | 'obj' }))}
-                    className="px-3 py-1.5 rounded bg-[#2A2A2A] border border-gray-700 focus:border-blue-500 outline-none"
+                    className="input w-32"
                   >
                     <option value="glb">GLB</option>
                     <option value="obj">OBJ</option>
@@ -151,7 +153,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex items-center justify-between">
-                  <label className="text-gray-300">Remove Background:</label>
+                  <label className="text-[hsl(var(--foreground)/70%)]">Remove Background:</label>
                   <div className="relative inline-flex items-center cursor-pointer">
                     <input
                       type="checkbox"
@@ -159,7 +161,7 @@ export default function Home() {
                       onChange={(e) => setSettings(s => ({ ...s, do_remove_background: e.target.checked }))}
                       className="sr-only peer"
                     />
-                    <div className="w-11 h-6 bg-[#2A2A2A] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-500"></div>
+                    <div className="w-11 h-6 bg-[hsl(var(--border))] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[hsl(var(--primary))]"></div>
                   </div>
                 </div>
               </div>
@@ -167,12 +169,7 @@ export default function Home() {
               <button
                 onClick={handleConvert}
                 disabled={!file || loading}
-                className={`w-full py-2.5 px-4 rounded-lg font-medium mt-6
-                  ${loading 
-                    ? 'bg-blue-500/50 cursor-not-allowed' 
-                    : 'bg-blue-500 hover:bg-blue-600'
-                  }
-                  disabled:opacity-50 transition-colors`}
+                className="btn btn-primary w-full mt-6"
               >
                 {loading ? (
                   <span className="flex items-center justify-center gap-2">
@@ -183,13 +180,13 @@ export default function Home() {
               </button>
 
               {error && (
-                <p className="text-red-400 text-sm mt-2">{error}</p>
+                <p className="text-red-500 text-sm mt-2">{error}</p>
               )}
             </div>
           </div>
 
           {/* Right Column - 3D Viewer */}
-          <div className="bg-[#1A1A1A] rounded-lg overflow-hidden">
+          <div className="card overflow-hidden">
             <ModelViewer modelUrl={modelUrl} loading={loading} />
           </div>
         </div>
